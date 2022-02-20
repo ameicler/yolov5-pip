@@ -95,7 +95,7 @@ def set_logging(rank=-1, verbose=True):
 
 
 def print_args(name, opt):
-    # Print argparser arguments
+    # Prhttps://github.com/ameicler/yolov5-pip/tree/main/yolov5/utilsint argparser arguments
     print(colorstr(f'{name}: ') + ', '.join(f'{k}={v}' for k, v in vars(opt).items()))
 
 
@@ -348,10 +348,13 @@ def check_dataset(data, autodownload=True):
         extract_dir, autodownload = data.parent, False
 
     # Read yaml (optional)
+    print("[YAML] data (before reading .yaml):", data)
     if isinstance(data, (str, Path)):
+        yaml_path = os.path.dirname(os.path.abspath(data))
         with open(data, errors='ignore') as f:
             data = yaml.safe_load(f)  # dictionary
-
+            data["path"] = yaml_path
+    
     # Parse yaml
     path = extract_dir or Path(data.get('path') or '')  # optional 'path' default to '.'
     for k in 'train', 'val', 'test':
