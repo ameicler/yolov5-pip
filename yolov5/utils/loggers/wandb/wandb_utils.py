@@ -24,7 +24,7 @@ try:
     assert hasattr(wandb, '__version__')  # verify package import not local dir
     if pkg.parse_version(wandb.__version__) >= pkg.parse_version('0.12.2') and RANK in [0, -1]:
         wandb.login(timeout=30)
-except (ImportError, AssertionError):
+except: #(ImportError, AssertionError):
     wandb = None
 
 WANDB_ARTIFACT_PREFIX = 'wandb-artifact://'
