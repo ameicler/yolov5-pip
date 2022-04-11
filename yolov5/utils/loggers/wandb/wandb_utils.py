@@ -18,6 +18,7 @@ from yolov5.utils.general import check_dataset, check_file
 
 RANK = int(os.getenv('RANK', -1))
 
+"""
 try:
     import wandb
 
@@ -26,6 +27,8 @@ try:
         wandb.login(timeout=30)
 except: #(ImportError, AssertionError):
     wandb = None
+"""
+wandb = None
 
 WANDB_ARTIFACT_PREFIX = 'wandb-artifact://'
 
