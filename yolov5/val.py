@@ -25,6 +25,7 @@ import sys
 from pathlib import Path
 from threading import Thread
 
+import pandas as pd
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -288,6 +289,16 @@ def run(
         for i, c in enumerate(ap_class):
             LOGGER.info(pf % (names[c], seen, nt[c], p[i], r[i], ap50[i], ap[i]))
 
+    # Export results as csv
+    header = "Class Images Labels P R mAP@.5 mAP@.5:.95"
+    headers = header.split()
+    data = []
+    data.append(['all', seen, nt.sum(), f"{float(mp):0.3f}", f"{float(mr):0.3f}", f"{float(map50):0.3f}", f"{float(map):0.3f}"])
+    for i, c in enumerate(ap_class):
+        data.append([names[c], seen, nt[c], f"{float(p[i]):0.3f}", f"{float(r[i]):0.3f}", f"{float(ap50[i]):0.3f}", f"{float(ap[i]):0.3f}"])
+    results_df = pd.DataFrame(data,columns=headers)
+    results_df.to_csv(os.path.join(save_dir, "results.csv"))
+    
     # Print speeds
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
     if not training:
