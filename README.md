@@ -9,8 +9,9 @@
 <div align="center">
   <a href="https://pepy.tech/project/yolov5"><img src="https://pepy.tech/badge/yolov5" alt="total downloads"></a>
   <a href="https://pepy.tech/project/yolov5"><img src="https://pepy.tech/badge/yolov5/month" alt="monthly downloads"></a>
-  <a href="https://badge.fury.io/py/yolov5"><img src="https://badge.fury.io/py/yolov5.svg" alt="pypi version"></a>
+  <a href="https://twitter.com/fcakyon"><img src="https://img.shields.io/twitter/follow/fcakyon?color=blue&logo=twitter&style=flat" alt="fcakyon twitter"></a>
   <br>
+  <a href="https://badge.fury.io/py/yolov5"><img src="https://badge.fury.io/py/yolov5.svg" alt="pypi version"></a>
   <a href="https://github.com/fcakyon/yolov5-pip/actions/workflows/ci.yml"><img src="https://github.com/fcakyon/yolov5-pip/actions/workflows/ci.yml/badge.svg" alt="ci testing"></a>
   <a href="https://github.com/fcakyon/yolov5-pip/actions/workflows/package_testing.yml"><img src="https://github.com/fcakyon/yolov5-pip/actions/workflows/package_testing.yml/badge.svg" alt="package testing"></a>
 </div>
@@ -19,9 +20,23 @@
 
 <div align="center">
 You can finally install <a href="https://github.com/ultralytics/yolov5">YOLOv5 object detector</a> using <a href="https://pypi.org/project/yolov5/">pip</a> and integrate into your project easily.
-</p>
 <img src="https://user-images.githubusercontent.com/26833433/136901921-abcfcd9d-f978-4942-9b97-0e3f202907df.png" width="1000">
+<br>
+This yolov5 package contains everything from ultralytics/yolov5 <a href="https://github.com/ultralytics/yolov5/commit/ea72b84f5e690cb516642ce2d9ae200145b0af34">at this commit</a> plus:
+<br>
+1. Easy installation via pip: `pip install yolov5`
+<br>
+2. Full CLI integration with <a href="https://github.com/google/python-fire">fire</a> package
+<br>
+3. COCO dataset format support (for training)
+<br>
+4. <a href="https://aws.amazon.com/s3/">S3</a> support (model and dataset upload)
+<br>
+5. <a href="https://neptune.ai/">NeptuneAI</a> logger support (metric, model and dataset logging)
+<br>
+6. Classwise AP logging during experiments
 </div>
+
 
 ## <div align="center">Install</div>
 
