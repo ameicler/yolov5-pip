@@ -438,9 +438,13 @@ def check_dataset(data, autodownload=True):
         extract_dir, autodownload = data.parent, False
 
     # Read yaml (optional)
+    print("[YAML] data (before reading .yaml):", data)
     if isinstance(data, (str, Path)):
+        yaml_path = os.path.dirname(os.path.abspath(data))
         with open(data, errors='ignore') as f:
             data = yaml.safe_load(f)  # dictionary
+            data["path"] = yaml_path
+
 
     # Resolve paths
     path = Path(extract_dir or data.get('path') or '')  # optional 'path' default to '.'
