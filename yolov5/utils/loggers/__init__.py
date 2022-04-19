@@ -20,7 +20,6 @@ from yolov5.utils.torch_utils import de_parallel
 LOGGERS = ('csv', 'tb', 'wandb', 'neptune')  # text-file, TensorBoard, Weights & Biases, NeptuneAI
 RANK = int(os.getenv('RANK', -1))
 
-"""
 try:
     import wandb
     assert hasattr(wandb, '__version__')  # verify package import not local dir
@@ -33,8 +32,7 @@ try:
             wandb = None
 except: #(ImportError, AssertionError):
     wandb = None
-"""
-wandb = None
+#wandb = None
 
 try:
     import neptune.new as neptune
