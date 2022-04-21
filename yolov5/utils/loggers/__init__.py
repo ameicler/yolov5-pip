@@ -124,12 +124,10 @@ class Loggers():
 
     def on_pretrain_routine_end(self):
         # Callback runs on pre-train routine end
-        pass
-        """
         paths = self.save_dir.glob('*labels*.jpg')  # training labels
         if self.wandb:
             self.wandb.log({"Labels": [wandb.Image(str(x), caption=x.name) for x in paths]})
-        """
+        
 
     def on_train_batch_end(self, ni, model, imgs, targets, paths, plots, sync_bn):
         # Callback runs on train batch end
@@ -139,14 +137,14 @@ class Loggers():
                     with warnings.catch_warnings():
                         warnings.simplefilter('ignore')  # suppress jit trace warning
                         self.tb.add_graph(torch.jit.trace(de_parallel(model), imgs[0:1], strict=False), [])
-            """
             if ni < 3:
                 f = self.save_dir / f'train_batch{ni}.jpg'  # filename
                 Thread(target=plot_images, args=(imgs, targets, paths, f), daemon=True).start()
-            if self.wandb and ni == 10:
+            no_media = True
+            if self.wandb and ni == 10 and no_media is False:
                 files = sorted(self.save_dir.glob('train*.jpg'))
                 self.wandb.log({'Mosaics': [wandb.Image(str(f), caption=f.name) for f in files if f.exists()]})
-            """
+                
             
     def on_train_epoch_end(self, epoch):
         # Callback runs on train epoch end
@@ -161,13 +159,11 @@ class Loggers():
             self.wandb.val_one_image(pred, predn, path, names, im)
 
     def on_val_end(self):
-        pass
-        """
         # Callback runs on val end
         if self.wandb:
             files = sorted(self.save_dir.glob('val*.jpg'))
             self.wandb.log({"Validation": [wandb.Image(str(f), caption=f.name) for f in files]})
-        """ 
+        
     def on_fit_epoch_end(self, vals, epoch, best_fitness, fi):
         # Callback runs at the end of each fit (train+val) epoch
         x = {k: v for k, v in zip(self.keys + self.class_name_keys, vals)}  # dict
